@@ -47,6 +47,10 @@ const hoursWorkedOnDate = (employeeRecord, formDate) => {
   const timeIn = employeeRecord.timeInEvents.find(e => e.date === formDate)
   const timeOut = employeeRecord.timeOutEvents.find(e => e.date === formDate)
 
+  if (!timeIn || !timeOut) {
+    throw new Error(`Missing timeIn or timeOut for date ${formDate}`);
+  }
+
   return (timeOut.hour - timeIn.hour) / 100
 }
 
